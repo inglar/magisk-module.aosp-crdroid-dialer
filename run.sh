@@ -4,7 +4,7 @@ BASE_DIR=/srv
 EXTRACTED_DIR=${BASE_DIR}/extracted
 MODULE_DIR=${BASE_DIR}/module_template
 SHARE_DIR=${BASE_DIR}/share
-CRDROID_BASE_VERSION=8
+CRDROID_BASE_VERSION=10
 ROM_PART=product
 
 if [ -z $1 ]; then
@@ -35,7 +35,7 @@ DEVICE_HTML_FILE=device_${DEVICE_NAME}.html
 wget -O ${DEVICE_HTML_FILE} ${ROM_SITE_URL}
 
 #ROM_URL=https://sourceforge.net/projects/crdroid/files/sweet/7.x/crDroidAndroid-11.0-20211114-sweet-v7.12.zip/download
-ROM_URL=$(grep -Eo "'(https://[^']+)'.+Download latest version" ${DEVICE_HTML_FILE} | sed -E "s#'(https://[^']+).+#\1#")
+ROM_URL=$(grep -Eo "(\"https://[^\"]+).+Download latest version" ${DEVICE_HTML_FILE} | sed -E "s#\"(https://[^\"]+).+#\1#")
 echo ${ROM_URL}
 
 if [ -z ${ROM_URL} ]; then
